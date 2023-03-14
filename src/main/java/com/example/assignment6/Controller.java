@@ -3,10 +3,10 @@ package com.example.assignment6;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 
@@ -20,6 +20,11 @@ public class Controller {
     @RequestMapping("/login")
     String toLogin() {
         return "login";
+    }
+
+    @RequestMapping("/renew")
+    String toRenew() {
+        return "renew";
     }
 
     @PostMapping("/controller")
