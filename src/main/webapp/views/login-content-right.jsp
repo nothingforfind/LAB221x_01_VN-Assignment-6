@@ -2,7 +2,11 @@
 
 <div class=" box-2 d-flex flex-column h-100">
     <form action="controller" method="post">
-        <p class="lblTitle" style>Log in</p>
+        <p class="lblTitle">Log in</p>
+
+        <label hidden="hidden">
+            <input type="text" class="checkbox" name="action" value="login">
+        </label>
 
         <p class="lblUaP">Username:</p>
         <label class="lblUaP">
