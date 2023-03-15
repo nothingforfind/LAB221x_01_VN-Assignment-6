@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class=" box-2 d-flex flex-column h-100">
-    <form action="controller" method="post">
+    <form action="loginCheck" method="post">
         <p class="lblTitle">Log in</p>
 
         <label hidden="hidden">
