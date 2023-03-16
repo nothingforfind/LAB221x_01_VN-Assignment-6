@@ -24,7 +24,7 @@ class UserManagerTest {
     @Autowired
     UserDAO userDAO;
 
-    private final User user = new User("1234567890123456", "Abcd1234", "What is your favorite color?", "Blue", "What is your pet's name?", "Max");
+    private final User user = new User("1234567890123456", "Abcd1234", "What is your favorite color?", "Blue", "What is your pet's name?", "Max", "How are you today?", "Better than!");
 
     @BeforeEach
     public void setUp() {
@@ -38,24 +38,33 @@ class UserManagerTest {
 
     @Test
     @Rollback(value = true)
+    void checkEmtyInput() {
+
+        String actual = userManager.checkAccount("", "");
+        String expected = "User ID và password không được để trống.";
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    @Rollback(value = true)
     void checkOverWrongTime() {
 
-        String actual = userManager.check("1234567890123456", "Abcd1233");
+        String actual = userManager.checkAccount("1234567890123456", "Abcd1233");
         String expected = "Password chưa đúng.\n" +
                 "Số lần thử còn: 2";
         Assertions.assertEquals(expected, actual);
 
-        actual = userManager.check("1234567890123456", "Abcd1233");
+        actual = userManager.checkAccount("1234567890123456", "Abcd1233");
         expected = "Password chưa đúng.\n" +
                 "Số lần thử còn: 1";
         Assertions.assertEquals(expected, actual);
 
-        actual = userManager.check("1234567890123456", "Abcd1233");
+        actual = userManager.checkAccount("1234567890123456", "Abcd1233");
         expected = "Password chưa đúng.\n" +
                 "Số lần thử còn: 0";
         Assertions.assertEquals(expected, actual);
 
-        actual = userManager.check("1234567890123456", "Abcd1233");
+        actual = userManager.checkAccount("1234567890123456", "Abcd1233");
         expected = "Tài khoản của bạn đã bị khóa.\n" +
                 "Vui lòng liên lạc Call Center.";;
         Assertions.assertEquals(expected, actual);
@@ -65,17 +74,16 @@ class UserManagerTest {
     @Rollback(value = true)
     void checkWrongSyntax() {
 
-        String actual = userManager.check("123", "123");
-        String expected = "Vui lòng kiểm tra lại cú pháp.\n" +
-                "+ User ID bao gồm 16 kí tự số.\n" +
-                "+ Password bao gồm 8 kí tự chữ và số.\n";
+        String actual = userManager.checkAccount("123", "123");
+        String expected = "User ID là 16 kí tự số.\n" +
+                "Password bao gồm 8 kí tự chữ và số.\n";
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
     @Rollback
     void checkNull() {
-        String actual = userManager.check("1234567890123453", "Abcd1224");
+        String actual = userManager.checkAccount("1234567890123453", "Abcd1224");
         String expected = "User ID không tồn tại.\n" +
                 "Vui lòng thử lại sau.";
         Assertions.assertEquals(expected, actual);
@@ -85,7 +93,7 @@ class UserManagerTest {
     @Rollback(value = true)
     void checkWrongDatabase() {
 
-        String actual = userManager.check(user.getUserId(), "Abcd1224");
+        String actual = userManager.checkAccount(user.getUserId(), "Abcd1224");
         String expected = "Password chưa đúng.\n" +
                 "Số lần thử còn: 2";
         Assertions.assertEquals(expected, actual);
@@ -96,7 +104,7 @@ class UserManagerTest {
     @Rollback(value = true)
     void checkLogged() {
 
-        String actual = userManager.check(user.getUserId(), user.getPassword());
+        String actual = userManager.checkAccount(user.getUserId(), user.getPassword());
         String expected = "Đăng nhập thành công";
         Assertions.assertEquals(expected, actual);
     }

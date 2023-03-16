@@ -17,13 +17,16 @@ public class UserDAO {
     private JdbcTemplate jdbcTemplate;
 
     public void insertUser(User user) {
-        String sql = "INSERT INTO user_manager.users (userid, password, question1, answer1, question2, answer2, time) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUserId(), user.getPassword(), user.getQuestion1(), user.getAnswer1(), user.getQuestion2(), user.getAnswer2(), user.getTime());
+        String sql = "INSERT INTO user_manager.users (userid, password, question1, answer1, question2, answer2, question3, answer3, time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, user.getUserId(), user.getPassword(), user.getQuestion1(), user.getAnswer1(),
+                user.getQuestion2(), user.getAnswer2(), user.getQuestion3(), user.getAnswer3(), user.getTime());
     }
 
     public void updateUser(User user) {
-        String sql = "UPDATE user_manager.users SET password = ?, question1 = ?, answer1 = ?, question2 = ?, answer2 = ?, time = ? WHERE userid = ?";
-        jdbcTemplate.update(sql, user.getPassword(), user.getQuestion1(), user.getAnswer1(), user.getQuestion2(), user.getAnswer2(), user.getTime(), user.getUserId());
+        String sql = "UPDATE user_manager.users SET password = ?, question1 = ?, answer1 = ?, question2 = ?, answer2 = ?, question3 = ?, answer3 = ?,time = ? WHERE userid = ?";
+        jdbcTemplate.update(sql, user.getPassword(), user.getQuestion1(), user.getAnswer1(),
+                user.getQuestion2(), user.getAnswer2(), user.getQuestion3(), user.getAnswer3(),
+                user.getTime(), user.getUserId());
     }
 
     public boolean checkUser(String userid, String password) {
@@ -67,6 +70,8 @@ public class UserDAO {
             user.setAnswer1(rs.getString("answer1"));
             user.setQuestion2(rs.getString("question2"));
             user.setAnswer2(rs.getString("answer2"));
+            user.setQuestion3(rs.getString("question3"));
+            user.setAnswer3(rs.getString("answer3"));
             user.setTime(rs.getInt("time"));
             return user;
         }

@@ -7,7 +7,7 @@
         <p class="question-header">Câu hỏi 1:</p>
         <label>
             <select name="question1" class="question-select-list">
-                <option value="partner">--Vui lòng chọn câu hỏi dưới đây--</option>
+                <option value="emty">--Vui lòng chọn câu hỏi dưới đây--</option>
                 <option value="partner">Vợ/chồng bạn tên là gì?</option>
                 <option value="pet">Thú nuôi của bạn tên gì?</option>
                 <option value="parent">Mẹ/bố bạn tên là gì?</option>
@@ -21,7 +21,7 @@
         <p class="question-header">Câu hỏi 2:</p>
         <label>
             <select name="question2" class="question-select-list">
-                <option value="partner">--Vui lòng chọn câu hỏi dưới đây--</option>
+                <option value="emty">--Vui lòng chọn câu hỏi dưới đây--</option>
                 <option value="partner">Vợ/chồng bạn tên là gì?</option>
                 <option value="pet">Thú nuôi của bạn tên gì?</option>
                 <option value="parent">Mẹ/bố bạn tên là gì?</option>
@@ -35,7 +35,7 @@
         <p class="question-header">Câu hỏi 3:</p>
         <label>
             <select name="question3" class="question-select-list">
-                <option value="partner">--Vui lòng chọn câu hỏi dưới đây--</option>
+                <option value="emty">--Vui lòng chọn câu hỏi dưới đây--</option>
                 <option value="partner">Vợ/chồng bạn tên là gì?</option>
                 <option value="pet">Thú nuôi của bạn tên gì?</option>
                 <option value="parent">Mẹ/bố bạn tên là gì?</option>
@@ -53,12 +53,12 @@
 
         <p class="question-header">New Password:</p>
         <label>
-            <input type="password" class="border-input" name="newPassword" placeholder="...">
+            <input type="password" class="border-input" name="newPassword1" placeholder="...">
         </label>
 
         <p class="question-header">Confirm New Password:</p>
         <label>
-            <input type="password"class="border-input" name="newPassword" placeholder="...">
+            <input type="password"class="border-input" name="newPassword2" placeholder="...">
         </label> <br>
 
         <p class="error-alert">${result}</p>

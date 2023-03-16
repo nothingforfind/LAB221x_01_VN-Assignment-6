@@ -26,24 +26,36 @@ public class Controller {
         return "first-time";
     }
 
+    @RequestMapping("/home")
+    String toHome() {
+        return "home";
+    }
 
+    /**
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @PostMapping("/loginCheck")
     public void loginCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String result = userManager.check(req.getParameter("userid"), req.getParameter("password"));
+        String result = userManager.checkAccount(req.getParameter("userid"), req.getParameter("password"));
 
-        if (result.equals("Đăng nhập thành công")) {
+        if (result.equals("Đăng nhập thành công") && userManager.checkFirstTime(req.getParameter("userid"))) {
+            req.getSession().setAttribute("loggedAccount", req.getParameter("userid"));
             req.getRequestDispatcher("/first-time").forward(req, resp);
+        } else if (result.equals("Đăng nhập thành công") && !userManager.checkFirstTime(req.getParameter("userid"))) {
+            req.getSession().setAttribute("loggedAccount", req.getParameter("userid"));
+            req.getRequestDispatcher("/home").forward(req, resp);
         } else {
             req.setAttribute("result", result);
             req.getRequestDispatcher("/login").forward(req, resp);
         }
     }
 
-
     /**
-     * Check ít nhất 1 câu hỏi không null, câu trả lời của câu hỏi đó phải không null.
-     * Mật khẩu cũ phải đúng.
-     * Mật khẩu mới phải trùng nhau.
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -51,6 +63,16 @@ public class Controller {
      */
     @PostMapping("/updateProtection")
     public void updateProtection(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/login");
+        String result = userManager.checkForm((String) req.getSession().getAttribute("loggedAccount"),
+                req.getParameter("question1"), req.getParameter("question2"), req.getParameter("question3"),
+                req.getParameter("answer1"), req.getParameter("answer2"), req.getParameter("answer3"),
+                req.getParameter("oldPassword"), req.getParameter("newPassword1"), req.getParameter("newPassword2"));
+
+        if (result.equals("Cập nhật thông tin thành công.")) {
+            req.getRequestDispatcher("/home").forward(req, resp);
+        } else {
+            req.setAttribute("result", result);
+            req.getRequestDispatcher("/first-time").forward(req, resp);
+        }
     }
 }

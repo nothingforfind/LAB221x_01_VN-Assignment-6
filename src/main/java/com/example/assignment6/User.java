@@ -9,11 +9,13 @@ public class User {
     private String answer1;
     private String question2;
     private String answer2;
+    private String question3;
+    private String answer3;
     private int time;
 
     public User() {}
 
-    public User(int id, String userId, String password, String question1, String answer1, String question2, String answer2, int time) {
+    public User(int id, String userId, String password, String question1, String answer1, String question2, String answer2, String question3, String answer3, int time) {
         this.id = id;
         this.userId = userId;
         this.password = password;
@@ -21,26 +23,32 @@ public class User {
         this.answer1 = answer1;
         this.question2 = question2;
         this.answer2 = answer2;
+        this.question3 = question3;
+        this.answer3 = answer3;
         this.time = time;
     }
 
-    public User(String userId, String password, String question1, String answer1, String question2, String answer2, boolean locked, int time) {
+    public User(String userId, String password, String question1, String answer1, String question2, String answer2, String question3, String answer3, int time) {
         this.userId = userId;
         this.password = password;
         this.question1 = question1;
         this.answer1 = answer1;
         this.question2 = question2;
         this.answer2 = answer2;
+        this.question3 = question3;
+        this.answer3 = answer3;
         this.time = time;
     }
 
-    public User(String userId, String password, String question1, String answer1, String question2, String answer2) {
+    public User(String userId, String password, String question1, String answer1, String question2, String answer2, String question3, String answer3) {
         this.userId = userId;
         this.password = password;
         this.question1 = question1;
         this.answer1 = answer1;
         this.question2 = question2;
         this.answer2 = answer2;
+        this.question3 = question3;
+        this.answer3 = answer3;
     }
 
     public int getId() {
@@ -97,6 +105,22 @@ public class User {
 
     public void setAnswer2(String answer2) {
         this.answer2 = answer2;
+    }
+
+    public String getQuestion3() {
+        return question3;
+    }
+
+    public void setQuestion3(String question3) {
+        this.question3 = question3;
+    }
+
+    public String getAnswer3() {
+        return answer3;
+    }
+
+    public void setAnswer3(String answer3) {
+        this.answer3 = answer3;
     }
 
     public int getTime() {
