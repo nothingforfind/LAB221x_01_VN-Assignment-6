@@ -4,7 +4,7 @@
     <form action="updateProtection" method="post">
         <p class="title-label" style>First Time Login</p>
 
-        <p class="question-header">Câu hỏi 1:</p>
+        <p class="question-header">Question 1:</p>
         <label>
             <select name="question1" class="question-select-list">
                 <option value="emty">--Vui lòng chọn câu hỏi dưới đây--</option>
@@ -18,7 +18,7 @@
             <input type="text" class="border-input" name="answer1" placeholder="...">
         </label>
 
-        <p class="question-header">Câu hỏi 2:</p>
+        <p class="question-header">Question 2:</p>
         <label>
             <select name="question2" class="question-select-list">
                 <option value="emty">--Vui lòng chọn câu hỏi dưới đây--</option>
@@ -32,7 +32,7 @@
             <input type="text" class="border-input" name="answer2" placeholder="...">
         </label>
 
-        <p class="question-header">Câu hỏi 3:</p>
+        <p class="question-header">Question 3:</p>
         <label>
             <select name="question3" class="question-select-list">
                 <option value="emty">--Vui lòng chọn câu hỏi dưới đây--</option>

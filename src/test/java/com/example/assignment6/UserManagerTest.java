@@ -61,7 +61,8 @@ class UserManagerTest {
 
         actual = userManager.checkAccount("1234567890123456", "Abcd1233");
         expected = "Password chưa đúng.\n" +
-                "Số lần thử còn: 0";
+                "Tài khoản của bạn đã bị khóa.\n" +
+                "Vui lòng liên lạc Call Center.";
         Assertions.assertEquals(expected, actual);
 
         actual = userManager.checkAccount("1234567890123456", "Abcd1233");

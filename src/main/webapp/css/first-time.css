@@ -2,7 +2,7 @@
 
 .body {
     position: relative;
-    height: 850px;
+    height: 880px;
     margin: 35px auto 20px;
     border: 1px solid #dddd;
     border-radius: 18px;
@@ -88,6 +88,8 @@
 
 .error-alert {
     color: #fe2929;
+    width: 43%;
+    margin-left: 29%;
 }
 
 body {

@@ -35,6 +35,13 @@ public class UserManager {
         if (checkWrongPassword(password)) {
             user.setTime(user.getTime() + 1);
             userDAO.updateUser(user);
+
+            if (user.getTime() == 3) {
+                return "Password chưa đúng.\n" +
+                        "Tài khoản của bạn đã bị khóa.\n" +
+                        "Vui lòng liên lạc Call Center.";
+            }
+
             return "Password chưa đúng.\n" +
                     "Số lần thử còn: " + (3 - user.getTime());
         }
@@ -53,7 +60,7 @@ public class UserManager {
     }
 
     private boolean checkLock() {
-        return user.getTime() >= 3;
+        return user.getTime() > 2;
     }
 
     private boolean checkWrongPassword(String password) {
@@ -81,6 +88,10 @@ public class UserManager {
 
         if (!user.getPassword().equals(oldPassword)) {
             return "Password cũ không đúng";
+        }
+
+        if (oldPassword.equals(newPassword1)) {
+            return "Password mới không được trùng với password cũ";
         }
 
         if (!newPassword1.equals(newPassword2)) {
