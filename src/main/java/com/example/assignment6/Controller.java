@@ -40,17 +40,25 @@ public class Controller {
      */
     @PostMapping("/loginCheck")
     public void loginCheck(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String result = userManager.checkAccount(req.getParameter("userid"), req.getParameter("password"));
 
-        if (result.equals("Đăng nhập thành công") && userManager.checkFirstTime(req.getParameter("userid"))) {
-            req.getSession().setAttribute("loggedAccount", req.getParameter("userid"));
-            req.getRequestDispatcher("/first-time").forward(req, resp);
-        } else if (result.equals("Đăng nhập thành công") && !userManager.checkFirstTime(req.getParameter("userid"))) {
-            req.getSession().setAttribute("loggedAccount", req.getParameter("userid"));
-            req.getRequestDispatcher("/home").forward(req, resp);
+        String result = userManager.checkAccount(req.getParameter("userid"), req.getParameter("password"));
+        String login = req.getParameter("login");
+
+        System.out.println(login);
+
+        if (login == null) {
+            resp.sendRedirect("/login");
         } else {
-            req.setAttribute("result", result);
-            req.getRequestDispatcher("/login").forward(req, resp);
+            if (result.equals("Đăng nhập thành công") && userManager.checkFirstTime(req.getParameter("userid"))) {
+                req.getSession().setAttribute("loggedAccount", req.getParameter("userid"));
+                req.getRequestDispatcher("/first-time").forward(req, resp);
+            } else if (result.equals("Đăng nhập thành công") && !userManager.checkFirstTime(req.getParameter("userid"))) {
+                req.getSession().setAttribute("loggedAccount", req.getParameter("userid"));
+                req.getRequestDispatcher("/home").forward(req, resp);
+            } else {
+                req.setAttribute("result", result);
+                req.getRequestDispatcher("/login").forward(req, resp);
+            }
         }
     }
 
@@ -68,11 +76,20 @@ public class Controller {
                 req.getParameter("answer1"), req.getParameter("answer2"), req.getParameter("answer3"),
                 req.getParameter("oldPassword"), req.getParameter("newPassword1"), req.getParameter("newPassword2"));
 
-        if (result.equals("Cập nhật thông tin thành công.")) {
-            req.getRequestDispatcher("/home").forward(req, resp);
+        String submit = req.getParameter("submit");
+        String cancel = req.getParameter("cancel");
+
+        if (submit != null) {
+            if (result.equals("Cập nhật thông tin thành công.")) {
+                req.getRequestDispatcher("/home").forward(req, resp);
+            } else {
+                req.setAttribute("result", result);
+                req.getRequestDispatcher("/first-time").forward(req, resp);
+            }
+        } else if (cancel != null) {
+            resp.sendRedirect("/login");
         } else {
-            req.setAttribute("result", result);
-            req.getRequestDispatcher("/first-time").forward(req, resp);
+            resp.sendRedirect("/first-time");
         }
     }
 }

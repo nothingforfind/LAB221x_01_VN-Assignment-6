@@ -64,8 +64,10 @@
         <p class="error-alert">${result}</p>
 
         <div class="center-div">
-            <button class="border-button">Reset</button>
-            <button class="border-button" type="submit">Log in</button>
+            <button class="border-button" type="submit" name="submit" value="submit">Submit</button>
+            <button class="border-button" type="submit" name="cancel" value="cancel">Cancel</button>
+            <button class="border-button" type="submit" name="clear" value="clear">Clear</button>
+
         </div>
 
 

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class=" box-2 d-flex flex-column h-100">
+
     <form action="loginCheck" method="post">
         <p class="lblTitle">Log in</p>
 
@@ -18,12 +19,12 @@
             <input type="password" id="password" class="inputUaP" name="password" placeholder="...">
         </label>
 
-        <label>
-            <input type="checkbox" class="checkbox" name="checkbox" value="remember">
-        </label>
-        <label>Remember me</label><br>
+        <div class="buttons-div">
+            <button class="btnlogin" type="submit" name="login" value="login">Log in</button>
+            <button class="btnlogin" type="submit" name="clear" value="clear">Clear</button>
+        </div>
 
-        <button class="btnlogin" type="submit" name="action" value="login">Log in</button>
+        <label id="forgot-label">Forgot pasword</label><br>
 
         <p id="noti">${result}</p>
     </form>

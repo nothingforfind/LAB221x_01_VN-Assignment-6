@@ -102,11 +102,12 @@
 
 .btnlogin {
     margin-top: 15px;
-    margin-left: 130px;
+    margin-right: 10px;
     height: 40px;
     width: 70px;
     border-radius: 15px;
     box-shadow: 0 5px #999;
+    display: inline-block;
 }
 
 .btnlogin:hover {
@@ -137,4 +138,18 @@ body {
 .checkbox {
     margin-top: 10px;
     margin-left: 104px;
+}
+
+.buttons-div {
+    width: 100%;
+    text-align: center;
+}
+
+#forgot-label {
+    margin-top: 10px;
+    margin-left: 30%;
+}
+
+#forgot-label:hover {
+    color: #fe2929;
 }
