@@ -1,7 +1,5 @@
 package com.example.assignment6;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,13 +16,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 class UserManagerTest {
 
+	/**
+	 * Khởi tạo đối tượng userManager 1 lần duy nhất bằng @Autowired.
+	 */
     @Autowired
     UserManager userManager;
 
+    /**
+	 * Khởi tạo đối tượng userDAO 1 lần duy nhất bằng @Autowired.
+	 */
     @Autowired
     UserDAO userDAO;
 
-    private final User user = new User("1234567890123456", "Abcd1234", "What is your favorite color?", "Blue", "What is your pet's name?", "Max", "How are you today?", "Better than!");
+    /**
+     * Khởi tạo đối tượng cố định cho các hàm test bên dưới.
+     */
+    private final User user = new User("1234567890123456", "Abcd1234", 
+    		"What is your favorite color?", "Blue", 
+    		"What is your pet's name?", "Max", 
+    		"How are you today?", "Better than!");
 
     @BeforeEach
     public void setUp() {
@@ -48,26 +58,29 @@ class UserManagerTest {
     @Test
     @Rollback(value = true)
     void checkOverWrongTime() {
+    	
+    	String userID = "1234567890123456";
+    	String password = "Abcd1233";
 
-        String actual = userManager.checkAccount("1234567890123456", "Abcd1233");
+        String actual = userManager.checkAccount(userID, password);
         String expected = "Password chưa đúng.\n" +
                 "Số lần thử còn: 2";
         Assertions.assertEquals(expected, actual);
 
-        actual = userManager.checkAccount("1234567890123456", "Abcd1233");
+        actual = userManager.checkAccount(userID, password);
         expected = "Password chưa đúng.\n" +
                 "Số lần thử còn: 1";
         Assertions.assertEquals(expected, actual);
 
-        actual = userManager.checkAccount("1234567890123456", "Abcd1233");
+        actual = userManager.checkAccount(userID, password);
         expected = "Password chưa đúng.\n" +
                 "Tài khoản của bạn đã bị khóa.\n" +
                 "Vui lòng liên lạc Call Center.";
         Assertions.assertEquals(expected, actual);
 
-        actual = userManager.checkAccount("1234567890123456", "Abcd1233");
+        actual = userManager.checkAccount(userID, password);
         expected = "Tài khoản của bạn đã bị khóa.\n" +
-                "Vui lòng liên lạc Call Center.";;
+                "Vui lòng liên lạc Call Center.";
         Assertions.assertEquals(expected, actual);
     }
 
@@ -84,7 +97,9 @@ class UserManagerTest {
     @Test
     @Rollback
     void checkNull() {
-        String actual = userManager.checkAccount("1234567890123453", "Abcd1224");
+    	String userID = "1234567890123453";
+    	String password = "Abcd1224";
+        String actual = userManager.checkAccount(userID, password);
         String expected = "User ID không tồn tại.\n" +
                 "Vui lòng thử lại sau.";
         Assertions.assertEquals(expected, actual);
@@ -105,7 +120,9 @@ class UserManagerTest {
     @Rollback(value = true)
     void checkLogged() {
 
-        String actual = userManager.checkAccount(user.getUserId(), user.getPassword());
+    	String userID = user.getUserId();
+    	String password = user.getPassword();
+        String actual = userManager.checkAccount(userID, password);
         String expected = "Đăng nhập thành công";
         Assertions.assertEquals(expected, actual);
     }
