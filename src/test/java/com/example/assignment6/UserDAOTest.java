@@ -47,7 +47,7 @@ class UserDAOTest {
         userDAO.insertUser(user4);
         userDAO.insertUser(user5);
         userDAO.insertUser(user6);
-        Assertions.assertEquals(firstSize+2, userDAO.getAll().size());
+        Assertions.assertEquals(firstSize+3, userDAO.getAll().size());
     }
 
     /**
