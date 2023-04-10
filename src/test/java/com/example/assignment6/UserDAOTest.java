@@ -21,6 +21,11 @@ class UserDAOTest {
     UserDAO userDAO;
     
     /**
+     * Add number for each test case.
+     */
+    private final int moreTime = 3;
+    
+    /**
      * Hàm này check size list ban đầu
      * Add thêm 3 user vào list
      * So sánh size đã thay đổi của list.
@@ -47,7 +52,7 @@ class UserDAOTest {
         userDAO.insertUser(user4);
         userDAO.insertUser(user5);
         userDAO.insertUser(user6);
-        Assertions.assertEquals(firstSize+3, userDAO.getAll().size());
+        Assertions.assertEquals(firstSize + moreTime, userDAO.getAll().size());
     }
 
     /**
