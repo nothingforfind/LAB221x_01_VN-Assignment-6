@@ -3,11 +3,15 @@ package com.example.assignment6;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -30,7 +34,7 @@ class UserDAOTest {
      * Add thêm 3 user vào list
      * So sánh size đã thay đổi của list.
      */
-    @Test
+    @Test()
     @Rollback(value = true)
     void insertUser() {
 
@@ -154,5 +158,18 @@ class UserDAOTest {
         userDAO.insertUser(user1);
         userDAO.insertUser(user2);
         Assertions.assertEquals(firstSize+2, userDAO.getAll().size());
+    }
+
+    @Test
+    void getMock() {
+        userDAO = mock(UserDAO.class);
+
+        User user = new User();
+        user.setId(1);
+        user.setUserId("Hello");
+        user.setPassword("123");
+
+        when(userDAO.getUser("1")).thenReturn(user);
+        Assertions.assertEquals("Hello", userDAO.getUser("1").getUserId());
     }
 }
